@@ -19,6 +19,19 @@ def test_auth():
 def auth_openai():
     print("Do Later")
 
+def example_query():
+    dotenv_path = Path('OAI.env')
+    load_dotenv(dotenv_path=dotenv_path)
+    openai.api_key = os.getenv('OPENAI_API_KEY')
+    resp = openai.Completion.create(
+        model="text-davinci-003",
+        prompt="write a poem about trying the Open AI API",
+        max_tokens=128,
+        temperature=0.5)
+    print(resp)
+    completion = openai.Completion.create(engine="ada", prompt="Hello world")
+    print(completion)
+
 def basequery():
     dotenv_path = Path('OAI.env')
     load_dotenv(dotenv_path=dotenv_path)
@@ -50,15 +63,10 @@ def train_model(basemodel,trainset,num_epochs):
     )
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
-    print(os.getenv('OPENAI_API_KEY'))
-
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
     #train_model('text-davinci-003', 'resume_train.JSONL',3)
-    basequery()
+    example_query()
+    #basequery()
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
